@@ -6,7 +6,7 @@
   "description": "비즈가든 케어카드 — 식물 안내 QR 정적 사이트 빌더",
   "scripts": {
     "build": "node src/build.js",
-    "pdf": "node src/build.js && node src/pdf.js",
+    "pdf": "node src/build.js all && node src/pdf.js",
     "preview": "npx serve dist"
   },
   "dependencies": {

@@ -110,7 +110,6 @@ for (const p of plants) {
   const slug = d.slug;
 
   const priceText = d.price != null ? '₩' + Number(d.price).toLocaleString('ko-KR') : '';
-  if (d.price == null) warn(`${p.file}: price 가 없어 가격이 표시되지 않습니다.`);
 
   let petText;
   if (d.pet_safe === true) petText = '🐶 반려동물에게 비교적 안전해요';
@@ -199,13 +198,18 @@ fs.writeFileSync(path.join(DIST, 'index.html'), `<!doctype html>
 </html>
 `);
 
-// ── 가격표 시트 (A4 6분할, 55×90mm) ─────────────
+// ── QR 시트 (A4 6분할, 55×90mm) — 요청할 때만 생성 ──
+// 기본 빌드는 시트를 만들지 않는다. `node src/build.js all` 또는 슬러그 지정 시 생성.
 const wanted = process.argv.slice(2);
-let tagPlants = plants;
+let tagPlants = [];
 if (wanted.length > 0) {
-  const unknown = wanted.filter((s) => !plants.some((p) => p.data.slug === s));
-  if (unknown.length) fail(`가격표 대상 슬러그를 찾을 수 없습니다: ${unknown.join(', ')}`);
-  tagPlants = plants.filter((p) => wanted.includes(p.data.slug));
+  if (wanted.length === 1 && wanted[0] === 'all') {
+    tagPlants = plants;
+  } else {
+    const unknown = wanted.filter((s) => !plants.some((p) => p.data.slug === s));
+    if (unknown.length) fail(`시트 대상 슬러그를 찾을 수 없습니다: ${unknown.join(', ')}`);
+    tagPlants = plants.filter((p) => wanted.includes(p.data.slug));
+  }
 }
 
 const cards = tagPlants.map((p, i) => {
@@ -216,23 +220,24 @@ const cards = tagPlants.map((p, i) => {
   <div class="t-emoji">${d.emoji || '🌱'}</div>
   <div class="t-name">${esc(d.name)}</div>
   <div class="t-eng">${esc(d.english || '')}</div>
-  <div class="t-price">${esc(p.priceText)}</div>
-  <img class="t-qr" src="${qrDataUri}" alt="QR — ${esc(p.url)}">
+${p.priceText ? `  <div class="t-price">${esc(p.priceText)}</div>\n` : ''}  <img class="t-qr" src="${qrDataUri}" alt="QR — ${esc(p.url)}">
   <div class="t-hint">📷 찍으면 키우는 법이 나와요</div>
   <div class="t-shop">🫧 ${esc(config.shopName)}</div>
 </div>`;
 });
 
-let sheetsHtml = '';
-for (let i = 0; i < cards.length; i += 6) {
-  sheetsHtml += `<section class="sheet">\n${cards.slice(i, i + 6).join('\n')}\n</section>\n`;
+if (tagPlants.length > 0) {
+  let sheetsHtml = '';
+  for (let i = 0; i < cards.length; i += 6) {
+    sheetsHtml += `<section class="sheet">\n${cards.slice(i, i + 6).join('\n')}\n</section>\n`;
+  }
+  fs.writeFileSync(path.join(PRINT, 'price-tags.html'), render(tagTpl, { shopName: config.shopName, sheetsHtml }));
 }
-fs.writeFileSync(path.join(PRINT, 'price-tags.html'), render(tagTpl, { shopName: config.shopName, sheetsHtml }));
 
 // ── 요약 ──────────────────────────────────────
-console.log(`\n빌드 완료: 식물 ${plants.length}개, 가격표 카드 ${tagPlants.length}장`);
-console.log(`  dist/            → 배포용 (GitHub Pages)`);
-console.log(`  print/price-tags.html → 브라우저에서 열어 인쇄하거나 npm run pdf`);
+console.log(`\n빌드 완료: 식물 ${plants.length}개` + (tagPlants.length ? `, 시트 카드 ${tagPlants.length}장` : ''));
+console.log(`  dist/            → 배포용 (GitHub Pages), QR은 dist/qr/`);
+if (tagPlants.length) console.log(`  print/price-tags.html → 브라우저에서 열어 인쇄하거나 npm run pdf`);
 if (baseUrl.includes('example')) {
   warn('shop.config.json 의 baseUrl 이 아직 예시 도메인입니다. 실제 도메인 확정 전에는 QR을 인쇄하지 마세요!');
 }
