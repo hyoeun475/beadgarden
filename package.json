@@ -1,0 +1,22 @@
+{
+  "name": "beadgarden",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "비즈가든 케어카드 — 식물 안내 QR 정적 사이트 빌더",
+  "scripts": {
+    "build": "node src/build.js",
+    "pdf": "node src/build.js && node src/pdf.js",
+    "preview": "npx serve dist"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "jsqr": "^1.4.0",
+    "marked": "^12.0.2",
+    "pngjs": "^7.0.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.9.0"
+  }
+}

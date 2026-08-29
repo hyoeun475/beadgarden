@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{name}} · {{shopName}}</title>
+<meta name="description" content="{{name}} 키우는 법 — {{shopName}} 케어카드">
+<meta name="theme-color" content="#FFFBEA">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="card">
+  <header class="topbar">
+    <a class="logo" href="../">🫧 {{shopName}}</a>
+    <span class="price">{{priceText}}</span>
+  </header>
+
+  <div class="pot" aria-hidden="true"><span class="pot-emoji">{{emoji}}</span></div>
+
+  <h1 class="plant-name">{{name}}</h1>
+  <p class="plant-english">{{english}}</p>
+  <div class="tags">{{{tagsHtml}}}</div>
+
+  <section class="gauges" aria-label="관리 난이도 요약">
+    {{{gaugesHtml}}}
+    <p class="pet">{{petText}}</p>
+  </section>
+
+  <div class="bead-line" role="separator" aria-hidden="true"></div>
+
+  {{{sectionsHtml}}}
+
+  <div class="actions">
+    {{{actionsHtml}}}
+  </div>
+
+  <footer class="foot">{{shopName}} · {{city}}</footer>
+</main>
+</body>
+</html>

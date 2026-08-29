@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>가격표 시트 · {{shopName}}</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&family=DM+Mono:wght@500&display=swap');
+
+/* 디자인 토큰 — src/style.css 와 동일한 7색 */
+:root {
+  --milk: #FFFBEA; --leaf: #2E7D4F; --bead-pink: #FF6FA8;
+  --bead-sky: #5DC8F5; --bead-lemon: #FFD93D; --bead-grape: #8B6CF6; --ink: #1E1E2A;
+}
+* { box-sizing: border-box; }
+@page { size: A4; margin: 0; }
+body { margin: 0; font-family: 'Pretendard Variable', Pretendard, sans-serif; color: var(--ink); }
+
+/* A4 한 장 = 55×90mm 카드 6장 (2열 × 3행) */
+.sheet {
+  width: 210mm; height: 297mm;
+  display: grid;
+  grid-template-columns: repeat(2, 55mm);
+  grid-auto-rows: 90mm;
+  gap: 6mm;
+  justify-content: center; align-content: center;
+  background: #fff;
+  page-break-after: always;
+}
+.tag {
+  position: relative;
+  border: 0.35mm dashed rgba(30,30,42,.45); /* 가위선 */
+  border-radius: 3mm;
+  background: var(--milk);
+  padding: 4mm 3mm 3mm;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.dot { /* 모서리 비즈 컬러 점 하나 */
+  position: absolute; top: 3mm; right: 3mm;
+  width: 3mm; height: 3mm; border-radius: 50%;
+}
+.t-emoji { font-size: 8mm; line-height: 1; }
+.t-name {
+  font-family: 'Gasoek One', sans-serif; font-weight: 400;
+  font-size: 6mm; line-height: 1.2; margin-top: 1.5mm; color: var(--ink);
+}
+.t-eng { font-style: italic; font-size: 2.6mm; opacity: .6; margin-top: .5mm; }
+.t-price {
+  font-family: 'DM Mono', monospace; font-weight: 500;
+  font-size: 5mm; color: var(--leaf); margin: 1.5mm 0 2mm;
+}
+.t-qr { width: 30mm; height: 30mm; } /* QR은 검정 (스캔 안정성) */
+.t-hint { font-size: 2.8mm; font-weight: 700; margin-top: 1.5mm; }
+.t-shop { font-size: 2.4mm; opacity: .55; margin-top: auto; }
+</style>
+</head>
+<body>
+{{{sheetsHtml}}}
+</body>
+</html>

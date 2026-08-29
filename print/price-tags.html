@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>가격표 시트 · 비즈가든</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Gasoek+One&family=DM+Mono:wght@500&display=swap');
+
+/* 디자인 토큰 — src/style.css 와 동일한 7색 */
+:root {
+  --milk: #FFFBEA; --leaf: #2E7D4F; --bead-pink: #FF6FA8;
+  --bead-sky: #5DC8F5; --bead-lemon: #FFD93D; --bead-grape: #8B6CF6; --ink: #1E1E2A;
+}
+* { box-sizing: border-box; }
+@page { size: A4; margin: 0; }
+body { margin: 0; font-family: 'Pretendard Variable', Pretendard, sans-serif; color: var(--ink); }
+
+/* A4 한 장 = 55×90mm 카드 6장 (2열 × 3행) */
+.sheet {
+  width: 210mm; height: 297mm;
+  display: grid;
+  grid-template-columns: repeat(2, 55mm);
+  grid-auto-rows: 90mm;
+  gap: 6mm;
+  justify-content: center; align-content: center;
+  background: #fff;
+  page-break-after: always;
+}
+.tag {
+  position: relative;
+  border: 0.35mm dashed rgba(30,30,42,.45); /* 가위선 */
+  border-radius: 3mm;
+  background: var(--milk);
+  padding: 4mm 3mm 3mm;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.dot { /* 모서리 비즈 컬러 점 하나 */
+  position: absolute; top: 3mm; right: 3mm;
+  width: 3mm; height: 3mm; border-radius: 50%;
+}
+.t-emoji { font-size: 8mm; line-height: 1; }
+.t-name {
+  font-family: 'Gasoek One', sans-serif; font-weight: 400;
+  font-size: 6mm; line-height: 1.2; margin-top: 1.5mm; color: var(--ink);
+}
+.t-eng { font-style: italic; font-size: 2.6mm; opacity: .6; margin-top: .5mm; }
+.t-price {
+  font-family: 'DM Mono', monospace; font-weight: 500;
+  font-size: 5mm; color: var(--leaf); margin: 1.5mm 0 2mm;
+}
+.t-qr { width: 30mm; height: 30mm; } /* QR은 검정 (스캔 안정성) */
+.t-hint { font-size: 2.8mm; font-weight: 700; margin-top: 1.5mm; }
+.t-shop { font-size: 2.4mm; opacity: .55; margin-top: auto; }
+</style>
+</head>
+<body>
+<section class="sheet">
+<div class="tag">
+  <span class="dot" style="background:#FF6FA8"></span>
+  <div class="t-emoji">🌿</div>
+  <div class="t-name">몬스테라</div>
+  <div class="t-eng">Monstera deliciosa</div>
+  <div class="t-price">₩28,000</div>
+  <img class="t-qr" src="data:image/png;base64,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" alt="QR — https://beadgarden.example.com/monstera/">
+  <div class="t-hint">📷 찍으면 키우는 법이 나와요</div>
+  <div class="t-shop">🫧 비즈가든</div>
+</div>
+<div class="tag">
+  <span class="dot" style="background:#5DC8F5"></span>
+  <div class="t-emoji">🌵</div>
+  <div class="t-name">스투키</div>
+  <div class="t-eng">Sansevieria stuckyi</div>
+  <div class="t-price">₩15,000</div>
+  <img class="t-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAAAklEQVR4AewaftIAAA8NSURBVO3BgY1tUW4ksCrh55+ydjJYH8B38Nwi2f2PAACnTACAcyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADn/Mt/Qdvwnd3Ni7b5Rbubr7XNi93N19rma7ubV23za3Y3X2ubq3Y3L9qG7+xuvjQBAM6ZAADnTACAcyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5//KjdjcXtc3Xdjev2ubXtM2r3c2Ltvna7ob/mbZ5tbv52u7mRdt8bXfzi3Y3F7XNr5kAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDn/8ke0zS/a3Vy0u3nVNl9rm4va5mu7m79gd/O13c2rtrmobX7R7ub/ugkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM75F85pm6+1zV+wu/lFbfNid/Oqbb7WNl/b3bxom1e7mxdt82p3A/+bJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzr9wzu7mVdv8mt3NX9A2f0HbvNrdvGibr+1uflHbfG13wx0TAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCc8y9/xO6G7+xuXrTNX9A2f0HbfG1384va5sXu5lXbvNjdvGqbi3Y3fGMCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOf8y49qG77RNq92N1/b3bxom1e7m6/tbl60zavdzYu2ebW7edE2r3Y3X9vdvGibV7ubF23zanfzom1+UdvwGyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADin+x+B/2Vt84t2N19rm79gd3NR2/yi3c2Ltnm1u+GOCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCc0/2P/AFt82p386JtftHu5kXbvNrdfK1tXuxu/oK2+dru5lXbfG1382va5tXu5kXb/AW7m1/UNi92N19rm1e7my9NAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzr/8F7TNq93N19rma7ubr7XN19rma7ubF23ztd3N13Y3r9rma7ubr7XN13Y3fKNtXu1uvra7+Vrb/F83AQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzuv+RH9Q2L3Y3X2ubX7S7edE2X9vd/KK2+TW7m1dt82J386ptXuxuvtY2X9vdvGqbF7ubV23ztd3Ni7bhO7ubL00AgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHBO9z9yVNt8bXfztba5aHfzqm1e7G5etc3Xdjcv2uZru5ur2uZru5sXbfO13c2rtvna7ob/vwkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnPMv/wVt87XdzavdzYu2+VrbfG1384va5mu7mxdt87Xdzau2ebG7edU2X2ubF7ubv2B386ptfk3bvNrdXNQ2r3Y3X5oAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCc7n+E/5G2+dru5mtt87XdzS9qmxe7m1dtw//M7uZF2/yi3c2vaZtXu5sXbfNqd/O1tvkLdjdfmgAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAOf/yo9rmxe7mVdu82N18rW2+trv5RW3zYnfzanfzom1+0e7mRdv8orb52u7ma23zYnfztd3NX9A2r3Y3L9rmogkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM75lx+1u3nRNq92N79md/Oqbb7WNi92N19rm1e7m6/tbl60zV+wu3nVNl9rmxe7m6va5qLdzUUTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADjnX/4L2uYXtc2L3c2rtrmobV7tbl60zdd2N6/a5tfsbn7R7uZF27za3bxom7+gbX5R27zY3bxqmxe7m6+1zavdzZcmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA451/+C3Y3r9rmL9jd/AW7m6+1zYvdzau2ebG7ebW7+Qva5sXu5lXb/AW7G/5ndjdf2918rW3+r5sAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDn/ctju5mtt87XdDfC/Y3fzF+xuXrXN19rma7ubF21z0QQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOf8y39B27za3Xytbb62u/la2/ya3c2r3c2vaZtXu5uvtc2L3c0v2t38BW3zF+xuvtY2L3Y3X9vdfK1tfs0EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM75l/+C3c2rtvkL2uaitvna7ubV7uZF2/yi3c2LtvkL2ubV7uYv2N28aJuvtc1VbfN/3QQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOf8y4/a3XytbV7sbl61zYvdzdfa5tXu5kXbXNU2X9vdfG1386JtXu1uvtY2X9vd/Jrdzau2+dru5te0zavdzYu2+TUTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADjnX/gfa5tXu5sXbfMX7G6u2t28aJuv7W6+trt51TZf2928aJtXbfNid/O1tnm1u/k1bfOL2ub/ugkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM7p/kc+1jZX7W6+1ja/Znfzqm2+trt50Ta/aHfztbb52u7mRdu82t3A/7a2ebG7+TUTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADjnX37U7ubXtM3X2uZru5tXbfOibX5R23xtd/Oibf6C3c3Xdjev2uZru5uvtc3Xdjcv2uZru5tXbfNid/O1tnm1u/nSBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA5/zLf8Hu5mtt82p387W2ebG7edU2f8Hu5kXbvNrd/Jrdzau2+dru5kXbvNrd/AVt82J387Xdzau2+druht8wAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBz/uW/oG1e7W7+gt3Ni7b5C3Y3v6htXuxuXrXN13Y3L9rmVdt8rW1e7G7+grZ5tbv52u7mRdu8apsXuxu+MQEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDn/8l+wu3nVNn9B27zY3XytbX5R27zY3bxqmxdt87Xdzdd2N39B27za3bxom6/tbr7WNq92N7+mbV7tbn7N7ubXTACAcyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnO5/5GNt82p386Jtrtrd/Jq2+UW7mxdt84t2N19rm1+zu3nVNi92N6/a5sXu5lXb8D+zu+H/bwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHO6/xFOaZtXu5u/oG1e7G5etc2v2d18rW1e7W5+Tdt8bXfzqm2+trv5NW3zanfztbb52u7mSxMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzgQAOOdf/gvahu/sbl7sbr7WNq92Ny/a5mtt82p386JtvtY2X9vdvGqbF7ubr+1u+J9pm1e7m1/TNhdNAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzr/8qN3NRW3ztbb5RW3ztd3Ni7Z51Ta/Znfzqm1+Tdu82t18rW2+trt50TZf2938BbubiyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM6//BFt84t2Nxftbl61zUW7m1dt86JtXu1uvra7uWh384va5i9omxe7m1dt87XdzZcmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA45184Z3fztbZ5tbt50TZf2928apsXbcN32ubF7ubV7uZF2/wFu5tXbfO13Q3/fxMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcCQBwzgQAOOdfOKdtflHb/Jq2+UW7mxdt86pt/oLdzdfa5sXu5lXbvNjdvGqbv6BtXuxuXu1uXrTNr5kAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM6ZAADnTACAcyYAwDkTAOCcf/kjdjf8z+xuXrXNi93N19rmVdu82N28apsXu5uv7W5etc2L3c2rtnmxu3nVNi92N19rm6+1zavdza/Z3fyitnmxu/k1EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4519+VNvA/7bdzYu2+VrbfG1387W2ebW7+dru5tfsbl61za9pm1e7mxdt82p382va5tXu5ksTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCc0/2PAACnTACAcyYAwDkTAOCcCQBwzgQAOGcCAJwzAQDOmQAA50wAgHMmAMA5EwDgnAkAcM4EADhnAgCcMwEAzpkAAOdMAIBzJgDAORMA4JwJAHDOBAA4ZwIAnDMBAM75f1nOuT9NZu/vAAAAAElFTkSuQmCC" alt="QR — https://beadgarden.example.com/stuckyi/">
+  <div class="t-hint">📷 찍으면 키우는 법이 나와요</div>
+  <div class="t-shop">🫧 비즈가든</div>
+</div>
+</section>
+
+</body>
+</html>
