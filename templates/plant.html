@@ -15,7 +15,7 @@
     <span class="price">{{priceText}}</span>
   </header>
 
-  <div class="pot" aria-hidden="true"><span class="pot-emoji">{{emoji}}</span></div>
+  <div class="pot">{{{potInner}}}</div>
 
   <h1 class="plant-name">{{name}}</h1>
   <p class="plant-english">{{english}}</p>
@@ -34,7 +34,7 @@
     {{{actionsHtml}}}
   </div>
 
-  <footer class="foot">{{shopName}} · {{city}}</footer>
+  <footer class="foot">{{shopName}} · {{city}}{{{footExtra}}}</footer>
 </main>
 </body>
 </html>

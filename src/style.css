@@ -34,7 +34,7 @@ body {
 /* 화분 실루엣 헤더: 비즈가 붙은 화분 위에 식물이 심겨 있음 */
 .pot {
   position: relative;
-  margin: 86px auto 6px;
+  margin: 128px auto 6px;
   width: 158px; height: 92px;
   background: var(--bead-pink);
   background-image: radial-gradient(circle at 5px 5px, rgba(255,255,255,.55) 2.5px, transparent 3px);
@@ -54,6 +54,15 @@ body {
   position: absolute; left: 50%; bottom: calc(100% - 4px);
   transform: translateX(-50%);
   font-size: 78px; line-height: 1; z-index: 1;
+}
+.pot-photo { /* 사진이 화분에 "심겨" 있는 원형 프레임 */
+  position: absolute; left: 50%; bottom: calc(100% - 44px);
+  transform: translateX(-50%);
+  width: 150px; height: 150px; border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--milk);
+  box-shadow: 0 4px 14px rgba(0,0,0,.16);
+  z-index: 1;
 }
 
 /* 이름 · 학명 · 태그 */
@@ -153,6 +162,12 @@ body {
   text-align: center; font-family: 'DM Mono', monospace;
   font-size: .78rem; opacity: .5; margin-top: 36px;
 }
+.foot a { color: inherit; }
+
+/* 사진 출처 페이지 */
+.credits-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+.credits-list a { color: var(--bead-grape); word-break: break-all; }
+.credits-list .muted { font-size: .8rem; opacity: .6; }
 
 /* 전체 목록 페이지 */
 .list-title { margin-top: 34px; }
@@ -165,6 +180,7 @@ body {
   text-decoration: none; color: var(--ink);
 }
 .plant-card .em { font-size: 1.9rem; line-height: 1; }
+.plant-card .thumb { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex: none; }
 .plant-card .nm { font-family: 'Gasoek One', sans-serif; font-weight: 400; font-size: 1.05rem; }
 .plant-card .tg { font-size: .75rem; color: var(--bead-grape); font-weight: 700; }
 .plant-card .pr { margin-left: auto; font-family: 'DM Mono', monospace; font-size: .9rem; }

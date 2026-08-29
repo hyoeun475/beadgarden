@@ -19,6 +19,12 @@
 | `npm run pdf` | 가격표 PDF 생성 (`npm i -D puppeteer` 필요) |
 | `npm run preview` | 로컬에서 미리보기 (http://localhost:3000) |
 
+## 사진 바꾸기
+
+`plants/photos/슬러그.jpg` 파일을 덮어쓰고 빌드하면 끝. 휴대폰 사진 그대로 넣어도 자동으로 줄여줍니다.
+지금 들어 있는 사진은 위키미디어 무료 사진(placeholder)이라, 실제 상품 사진으로 바꾸는 걸 추천해요.
+바꾼 뒤에는 `plants/photos/credits.json` 에서 그 식물 항목을 지워주세요 (출처 표기가 사라집니다).
+
 ## ⚠️ 인쇄 전에 꼭
 
 - `shop.config.json` 의 `baseUrl` 을 **실제 도메인으로 확정**하세요. 지금은 예시값입니다.

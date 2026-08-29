@@ -15,6 +15,7 @@ import { marked } from 'marked';
 import QRCode from 'qrcode';
 import { PNG } from 'pngjs';
 import jsQR from 'jsqr';
+import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
@@ -75,6 +76,20 @@ function parseSections(md) {
     return { title, html: marked.parse(body) };
   });
   return { intro, sections };
+}
+
+// ── 사진: plants/photos/<슬러그>.jpg|png|webp ────
+const PHOTOS_DIR = path.join(ROOT, 'plants', 'photos');
+const creditsPath = path.join(PHOTOS_DIR, 'credits.json');
+const credits = fs.existsSync(creditsPath)
+  ? JSON.parse(fs.readFileSync(creditsPath, 'utf8').replace(/^﻿/, '')) // BOM 허용
+  : {};
+function findPhoto(slug) {
+  for (const ext of ['jpg', 'jpeg', 'png', 'webp']) {
+    const f = path.join(PHOTOS_DIR, `${slug}.${ext}`);
+    if (fs.existsSync(f)) return f;
+  }
+  return null;
 }
 
 // ── 식물 파일 읽기 ──────────────────────────────
@@ -141,12 +156,27 @@ for (const p of plants) {
     ? `<a class="btn" href="${esc(config.instagram)}">📍 ${esc(config.shopName)} 인스타그램</a>`
     : '';
 
-  const html = render(plantTpl, {
-    name: d.name, english: d.english || '', emoji: d.emoji || '🌱',
-    shopName: config.shopName, city: config.city || '',
-    priceText, petText, tagsHtml, gaugesHtml, sectionsHtml, actionsHtml,
-  });
   fs.mkdirSync(path.join(DIST, slug), { recursive: true });
+
+  // 사진이 있으면 화분 헤더에 사진, 없으면 이모지 (자동 리사이즈로 200KB 이하 유지)
+  const photoSrc = findPhoto(slug);
+  let potInner = `<span class="pot-emoji">${esc(d.emoji || '🌱')}</span>`;
+  p.hasPhoto = false;
+  if (photoSrc) {
+    await sharp(photoSrc).rotate()
+      .resize({ width: 640, height: 640, fit: 'cover' })
+      .jpeg({ quality: 78 })
+      .toFile(path.join(DIST, slug, 'photo.jpg'));
+    potInner = `<img class="pot-photo" src="photo.jpg" alt="${esc(d.name)} 사진">`;
+    p.hasPhoto = true;
+  }
+  const footExtra = (p.hasPhoto && credits[slug]) ? ' · <a href="../credits/">사진 출처</a>' : '';
+
+  const html = render(plantTpl, {
+    name: d.name, english: d.english || '',
+    shopName: config.shopName, city: config.city || '',
+    priceText, petText, tagsHtml, gaugesHtml, sectionsHtml, actionsHtml, potInner, footExtra,
+  });
   fs.writeFileSync(path.join(DIST, slug, 'index.html'), html);
 
   // QR 생성 (오류정정 H — 코팅·오염 대비) + 디코딩 검증
@@ -169,8 +199,11 @@ for (const p of plants) {
 const listCards = plants.map((p) => {
   const d = p.data;
   const tags = (Array.isArray(d.tags) ? d.tags : []).map((t) => '#' + t).join(' ');
+  const face = p.hasPhoto
+    ? `<img class="thumb" src="${d.slug}/photo.jpg" alt="" loading="lazy">`
+    : `<span class="em">${d.emoji || '🌱'}</span>`;
   return `<a class="plant-card" href="${d.slug}/">`
-    + `<span class="em">${d.emoji || '🌱'}</span>`
+    + face
     + `<span><div class="nm">${esc(d.name)}</div><div class="tg">${esc(tags)}</div></span>`
     + `<span class="pr">${esc(p.priceText)}</span></a>`;
 }).join('\n    ');
@@ -197,6 +230,39 @@ fs.writeFileSync(path.join(DIST, 'index.html'), `<!doctype html>
 </body>
 </html>
 `);
+
+// ── 사진 출처 페이지 (위키미디어 사진 사용 시 라이선스 표기) ──
+const credited = plants.filter((p) => p.hasPhoto && credits[p.data.slug]);
+if (credited.length) {
+  const rows = credited.map((p) => {
+    const c = credits[p.data.slug];
+    return `<li><strong>${esc(p.data.name)}</strong><br>` +
+      `<a href="${esc(c.page)}">${esc(String(c.file).replace(/^File:/, ''))}</a><br>` +
+      `<span class="muted">${esc(c.author)} · ${esc(c.license)} · Wikimedia Commons</span></li>`;
+  }).join('\n    ');
+  fs.mkdirSync(path.join(DIST, 'credits'), { recursive: true });
+  fs.writeFileSync(path.join(DIST, 'credits', 'index.html'), `<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사진 출처 · ${esc(config.shopName)}</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="card">
+  <header class="topbar"><a class="logo" href="../">🫧 ${esc(config.shopName)}</a></header>
+  <h1 class="plant-name list-title">사진 출처</h1>
+  <p class="plant-english">아래 사진은 자유 라이선스로 공개된 것을 사용했어요.</p>
+  <ul class="credits-list">
+    ${rows}
+  </ul>
+  <footer class="foot">${esc(config.shopName)} · ${esc(config.city || '')}</footer>
+</main>
+</body>
+</html>
+`);
+}
 
 // ── QR 시트 (A4 6분할, 55×90mm) — 요청할 때만 생성 ──
 // 기본 빌드는 시트를 만들지 않는다. `node src/build.js all` 또는 슬러그 지정 시 생성.
