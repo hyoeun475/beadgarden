@@ -9,6 +9,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { marked } from 'marked';
@@ -163,11 +164,14 @@ for (const p of plants) {
   let potInner = `<span class="pot-emoji">${esc(d.emoji || '🌱')}</span>`;
   p.hasPhoto = false;
   if (photoSrc) {
+    const outPhoto = path.join(DIST, slug, 'photo.jpg');
     await sharp(photoSrc).rotate()
       .resize({ width: 640, height: 640, fit: 'cover' })
       .jpeg({ quality: 78 })
-      .toFile(path.join(DIST, slug, 'photo.jpg'));
-    potInner = `<img class="pot-photo" src="photo.jpg" alt="${esc(d.name)} 사진">`;
+      .toFile(outPhoto);
+    // 내용 해시를 쿼리로 붙여 사진 교체 시 브라우저 캐시를 무효화
+    p.photoVer = crypto.createHash('md5').update(fs.readFileSync(outPhoto)).digest('hex').slice(0, 8);
+    potInner = `<img class="pot-photo" src="photo.jpg?v=${p.photoVer}" alt="${esc(d.name)} 사진">`;
     p.hasPhoto = true;
   }
   const footExtra = (p.hasPhoto && credits[slug]) ? ' · <a href="../credits/">사진 출처</a>' : '';
@@ -200,7 +204,7 @@ const listCards = plants.map((p) => {
   const d = p.data;
   const tags = (Array.isArray(d.tags) ? d.tags : []).map((t) => '#' + t).join(' ');
   const face = p.hasPhoto
-    ? `<img class="thumb" src="${d.slug}/photo.jpg" alt="" loading="lazy">`
+    ? `<img class="thumb" src="${d.slug}/photo.jpg?v=${p.photoVer}" alt="" loading="lazy">`
     : `<span class="em">${d.emoji || '🌱'}</span>`;
   return `<a class="plant-card" href="${d.slug}/">`
     + face
