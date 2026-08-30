@@ -266,7 +266,11 @@ if (credited.length) {
 
 // ── QR 시트 (A4 6분할, 55×90mm) — 요청할 때만 생성 ──
 // 기본 빌드는 시트를 만들지 않는다. `node src/build.js all` 또는 슬러그 지정 시 생성.
-const wanted = process.argv.slice(2);
+const rawArgs = process.argv.slice(2);
+// --per=N : A4 한 장에 넣을 카드 수 (기본 6, 1이면 식물당 한 페이지)
+const perArg = rawArgs.find((a) => a.startsWith('--per='));
+const PER_SHEET = Math.min(6, Math.max(1, perArg ? parseInt(perArg.split('=')[1], 10) || 6 : 6));
+const wanted = rawArgs.filter((a) => !a.startsWith('--'));
 let tagPlants = [];
 if (wanted.length > 0) {
   if (wanted.length === 1 && wanted[0] === 'all') {
@@ -294,8 +298,9 @@ ${p.priceText ? `  <div class="t-price">${esc(p.priceText)}</div>\n` : ''}  <img
 
 if (tagPlants.length > 0) {
   let sheetsHtml = '';
-  for (let i = 0; i < cards.length; i += 6) {
-    sheetsHtml += `<section class="sheet">\n${cards.slice(i, i + 6).join('\n')}\n</section>\n`;
+  const sheetClass = PER_SHEET === 1 ? 'sheet one' : 'sheet';
+  for (let i = 0; i < cards.length; i += PER_SHEET) {
+    sheetsHtml += `<section class="${sheetClass}">\n${cards.slice(i, i + PER_SHEET).join('\n')}\n</section>\n`;
   }
   fs.writeFileSync(path.join(PRINT, 'price-tags.html'), render(tagTpl, { shopName: config.shopName, sheetsHtml }));
 }
