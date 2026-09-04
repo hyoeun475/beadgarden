@@ -1,3 +1,4 @@
 node_modules/
 dist/
 print/price-tags.pdf
+print/qr-only.pdf
