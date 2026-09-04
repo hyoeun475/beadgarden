@@ -106,5 +106,17 @@
                    "author":  "Photo by David J. Stang",
                    "license":  "CC BY-SA 4.0",
                    "page":  "https://commons.wikimedia.org/wiki/File:Ficus_pumila_variegata_1zz.jpg"
-               }
+               },
+    "black-velvet":  {
+                         "file":  "File:Starr-080117-1733-Alocasia reginula-leaf-Walmart Kahului-Maui (24807401661).jpg",
+                         "author":  "Forest and Kim Starr",
+                         "license":  "CC BY 3.0 us",
+                         "page":  "https://commons.wikimedia.org/wiki/File:Starr-080117-1733-Alocasia_reginula-leaf-Walmart_Kahului-Maui_(24807401661).jpg"
+                     },
+    "raven-zz":  {
+                     "file":  "File:Zamioculcas zamiifolia \u0027Dowon\u0027 vel Raven kz03.jpg",
+                     "author":  "Krzysztof Ziarnek, Kenraiz",
+                     "license":  "CC BY-SA 4.0",
+                     "page":  "https://commons.wikimedia.org/wiki/File:Zamioculcas_zamiifolia_%27Dowon%27_vel_Raven_kz03.jpg"
+                 }
 }
