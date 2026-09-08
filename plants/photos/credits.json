@@ -124,5 +124,17 @@
     "author": "Hobbykafe",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Hoya-kerrii_flowers_op.jpg"
+  },
+  "strawberry-caladium": {
+    "file": "File:Caladium 'Seafoam Pink' kz01.jpg",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Caladium_%27Seafoam_Pink%27_kz01.jpg"
+  },
+  "caladium-crown": {
+    "file": "File:Caladium 'Red Flash' kz01.jpg",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Caladium_%27Red_Flash%27_kz01.jpg"
   }
 }
