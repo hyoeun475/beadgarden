@@ -136,5 +136,29 @@
     "author": "Aureonatal",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Caladium_florida_clown.jpg"
+  },
+  "dracaena-rainbow": {
+    "file": "File:Rainbow Tree (Dracaena reflexa var. angustifolia 'Colorama') 2.jpg",
+    "author": "Mokkie",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rainbow_Tree_(Dracaena_reflexa_var._angustifolia_%27Colorama%27)_2.jpg"
+  },
+  "blue-bird": {
+    "file": "File:Chamaecyparis pisifera Boulevard 0zz.jpg",
+    "author": "Photo by David J. Stang",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chamaecyparis_pisifera_Boulevard_0zz.jpg"
+  },
+  "plumosa": {
+    "file": "File:Mammillaria plumosa 1zz.jpg",
+    "author": "Photo by David J. Stang",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mammillaria_plumosa_1zz.jpg"
+  },
+  "adenium": {
+    "file": "File:Adenium obesum 02.JPG",
+    "author": "Prenn",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Adenium_obesum_02.JPG"
   }
 }
