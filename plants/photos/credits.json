@@ -166,5 +166,29 @@
     "author": "Mickaël Schauli",
     "license": "CC BY-SA 4.0",
     "page": "https://commons.wikimedia.org/wiki/File:Pilea_peperomioides_-_Micka%C3%ABl_Schauli.jpg"
+  },
+  "albuca": {
+    "file": "File:Albuca spiralis kz02.jpg",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Albuca_spiralis_kz02.jpg"
+  },
+  "duffii": {
+    "file": "File:Nephrolepis cordifolia Duffii kz1.jpg",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nephrolepis_cordifolia_Duffii_kz1.jpg"
+  },
+  "pink-anthurium": {
+    "file": "File:Anthurium andraeanum hybrid-1-hrs-yercaud-salem-India.jpg",
+    "author": "Yercaud-elango",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Anthurium_andraeanum_hybrid-1-hrs-yercaud-salem-India.jpg"
+  },
+  "neofinetia": {
+    "file": "File:Vanda falcata.jpg",
+    "author": "Bouba at French Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Vanda_falcata.jpg"
   }
 }
