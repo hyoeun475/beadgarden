@@ -256,5 +256,35 @@
     "author": "Sindhu Haridas",
     "license": "CC0",
     "page": "https://commons.wikimedia.org/wiki/File:Dischidia_oiantha_variegata_@_Ramanthali_IMG_20240916_225558.jpg"
+  },
+  "maculata": {
+    "file": "File:(MHNT) Begonia maculata - young leaf.jpg",
+    "author": "Didier Descouens",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:(MHNT)_Begonia_maculata_-_young_leaf.jpg"
+  },
+  "podangis": {
+    "file": "File:Podangis dactyloceras Orchi 001.jpg",
+    "author": "Orchi",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Podangis_dactyloceras_Orchi_001.jpg"
+  },
+  "stromanthe": {
+    "file": "File:Stromanthe sanguinea 'Triostar'.jpg",
+    "author": "Hardyplants",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Stromanthe_sanguinea_%27Triostar%27.jpg"
+  },
+  "jacklyn": {
+    "file": "File:Alocasia Jacklyn Plant.jpg",
+    "author": "Accordingtoprince",
+    "license": "CC BY 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Alocasia_Jacklyn_Plant.jpg"
+  },
+  "curly-spider": {
+    "file": "File:2007-03-20CChlorophytum comosum Bonnie.jpg",
+    "author": "Wildfeuer",
+    "license": "CC BY 2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:2007-03-20CChlorophytum_comosum_Bonnie.jpg"
   }
 }
