@@ -298,5 +298,17 @@
     "author": "Jaknouse",
     "license": "CC BY-SA 3.0",
     "page": "https://commons.wikimedia.org/wiki/File:Nephrolepis_exaltata_indoor0705c.jpg"
+  },
+  "adiantum": {
+    "file": "File:Adiantum raddianum 20181125 151351.jpg",
+    "author": "Vengolis",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Adiantum_raddianum_20181125_151351.jpg"
+  },
+  "jasmine": {
+    "file": "File:Jasminum polyanthum IP0204063.jpg",
+    "author": "Leo Michels",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Jasminum_polyanthum_IP0204063.jpg"
   }
 }
